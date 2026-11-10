@@ -194,6 +194,19 @@ function start() {
         pointer.y = (e.clientY / innerHeight - 0.5);
     }, { passive: true });
 
+    // ---------- Story interactions (events from script.js) ----------
+    // card3d: a hovered card pulls the field toward it; pulse3d: a click ripples through it;
+    // scroll speed tilts the field so the story feels like it flows.
+    const focus = { x: 0, y: 0, on: 0, tx: 0, ty: 0, ton: 0 };
+    let pulse = 0, pulseX = 0, pulseY = 0, scrollVel = 0, lastScroll = scrollY;
+    window.addEventListener('card3d', (e) => {
+        const d = e.detail || {};
+        focus.ton = d.on ? 1 : 0;
+        if (d.on) { focus.tx = d.x; focus.ty = d.y; }
+    });
+    window.addEventListener('pulse3d', (e) => { pulse = 1; pulseX = e.detail?.x || 0; pulseY = e.detail?.y || 0; });
+    window.addEventListener('scroll', () => { scrollVel += scrollY - lastScroll; lastScroll = scrollY; }, { passive: true });
+
     // ---------- Loop ----------
     const target = new Float32Array(N * 3);
     const pos = new THREE.Vector3();
@@ -236,15 +249,30 @@ function start() {
         groupPos.x += (tx - groupPos.x) * follow;
         groupPos.y += (ty - groupPos.y) * follow;
         groupScale += (ts - groupScale) * follow;
-        group.position.copy(groupPos);
-        group.scale.setScalar(groupScale);
+        // story interactions: lean toward the hovered card, ripple on click, tilt with scroll speed
+        const ease3 = still.matches ? 1 : 1 - Math.pow(0.02, dt);
+        focus.on += (focus.ton - focus.on) * ease3;
+        focus.x += (focus.tx - focus.x) * ease3;
+        focus.y += (focus.ty - focus.y) * ease3;
+        scrollVel *= Math.pow(0.04, dt);
+        const flow = still.matches ? 0 : Math.max(-1, Math.min(1, scrollVel / 500));
+        pulse = Math.max(0, pulse - dt * 0.9);
+        const ripple = still.matches ? 0 : 0.14 * pulse * Math.sin((1 - pulse) * 16);
+        group.position.set(
+            groupPos.x + focus.x * focus.on * 1.4 + pulseX * pulse * 0.5,
+            groupPos.y - focus.y * focus.on * 0.9 - pulseY * pulse * 0.4 + flow * 0.25,
+            focus.on * 0.9,
+        );
+        group.scale.setScalar(groupScale * (1 + 0.06 * focus.on + ripple));
+        material.size = 0.07 * (1 + 0.35 * focus.on + 0.8 * pulse * pulse);
         const to = (opacityFor[a] + (opacityFor[b] - opacityFor[a]) * blend) * (dark ? 0.9 : 0.75);
         opacity += (to - opacity) * follow;
         material.opacity = opacity;
 
         const spin = still.matches ? 0 : time * 0.08;
-        group.rotation.y = spin + pointer.x * 0.5;
-        group.rotation.x = 0.18 + pointer.y * 0.3;
+        group.rotation.y = spin + pointer.x * 0.5 + focus.x * focus.on * 0.7 + pulse * 0.6;
+        group.rotation.x = 0.18 + pointer.y * 0.3 + focus.y * focus.on * 0.45 + flow * 0.5;
+        group.rotation.z = flow * 0.12;
         renderer.render(scene, camera);
 
         if (running) requestAnimationFrame(frame);

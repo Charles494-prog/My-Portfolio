@@ -544,18 +544,62 @@
         if (open) nerdToggle.scrollIntoView({ behavior: still.matches ? 'auto' : 'smooth', block: 'start' });
     });
 
-    /* ---------- 3D tilt on cards (mouse only) ---------- */
+    /* ---------- 3D tilt + light glare on cards (mouse only) ---------- */
+    // Hovering a card also tells the particle field behind the page (scene.js) where it is,
+    // so the 3D background leans toward it; a click sends a ripple through the particles.
     const fine = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const tell = (type, detail) => window.dispatchEvent(new CustomEvent(type, { detail }));
+    $$('.story-card').forEach((card) => card.classList.add('tilt'));
     $$('.tilt').forEach((card) => {
+        const centre = () => {
+            const box = card.getBoundingClientRect();
+            return { x: (box.left + box.width / 2) / innerWidth - 0.5, y: (box.top + box.height / 2) / innerHeight - 0.5 };
+        };
+        card.addEventListener('pointerenter', () => {
+            if (!fine.matches || still.matches) return;
+            tell('card3d', { on: true, ...centre() });
+        });
         card.addEventListener('pointermove', (event) => {
             if (!fine.matches || still.matches || !card.classList.contains('in')) return;
             const box = card.getBoundingClientRect();
             const x = (event.clientX - box.left) / box.width - 0.5;
             const y = (event.clientY - box.top) / box.height - 0.5;
-            card.style.transform = `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-3px)`;
+            const k = Math.min(1, 520 / box.width); // big cards tilt less
+            card.style.transform = `perspective(900px) rotateX(${(-y * 11 * k).toFixed(2)}deg) rotateY(${(x * 13 * k).toFixed(2)}deg) translateZ(14px) translateY(-4px)`;
+            card.style.setProperty('--gx', `${((x + 0.5) * 100).toFixed(1)}%`);
+            card.style.setProperty('--gy', `${((y + 0.5) * 100).toFixed(1)}%`);
+            card.classList.add('glare');
         });
-        card.addEventListener('pointerleave', () => { card.style.transform = ''; });
+        card.addEventListener('pointerleave', () => {
+            card.style.transform = '';
+            card.classList.remove('glare');
+            tell('card3d', { on: false });
+        });
+        card.addEventListener('pointerdown', () => { if (!still.matches) tell('pulse3d', centre()); });
     });
+
+    /* ---------- Scroll depth: cards and titles turn in 3D as they travel through the screen ---------- */
+    const depthEls = $$('.chapter-title, .story-card, .project, .stop, .skill-group, .cred, .duo-card');
+    depthEls.forEach((el) => { el.dataset.depth = ''; });
+    let depthQueued = false;
+    const depth = () => {
+        depthQueued = false;
+        if (still.matches) return;
+        const vh = innerHeight;
+        depthEls.forEach((el) => {
+            const box = el.getBoundingClientRect();
+            if (box.bottom < -80 || box.top > vh + 80) return;
+            // -1 when the element is high on the screen, 0 at the centre, 1 low on the screen
+            const p = Math.max(-1, Math.min(1, (box.top + Math.min(box.height, vh) / 2 - vh / 2) / (vh / 2)));
+            const amt = el.classList.contains('chapter-title') ? 16 : 9;
+            el.style.rotate = `1 0 0 ${(p * amt).toFixed(2)}deg`;
+            el.style.translate = `0 0 ${(-p * p * 80).toFixed(1)}px`;
+        });
+    };
+    const queueDepth = () => { if (!depthQueued) { depthQueued = true; requestAnimationFrame(depth); } };
+    window.addEventListener('scroll', queueDepth, { passive: true });
+    window.addEventListener('resize', queueDepth);
+    queueDepth();
 
     /* ---------- Contact ---------- */
     const copy = $('#copyEmail');

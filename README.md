@@ -18,11 +18,18 @@ Scrolling reads like a story: Prologue → Chapter 1 *What I believe* → Chapte
 | `vendor/three.module.min.js` | Three.js r160, served with the site (no CDN dependency) |
 | `resume.pdf` | The résumé the "Download résumé" button gives out. Replace it with your own PDF any time (keep the name) |
 | `favicon.svg` | Browser tab icon |
+| `tools/resume.html` | Source of `resume.pdf` (not deployed). Regenerate: `chrome --headless --no-pdf-header-footer --print-to-pdf=resume.pdf tools/resume.html` |
 
 Notes
 - The leadership calendar counts months from January 2020 to today, so "6+ years" updates by itself.
 - If `resume.pdf` is ever missing, the button shows a short "coming soon" message instead of a broken download.
 - Visitors who turn off animations in their device settings get every animation in its finished state.
+
+## Run it locally
+
+Open it through a local server, not by double-clicking `index.html` (browsers block the 3D module on `file://`):
+`npx serve .` or `python -m http.server 8000`.
+If animations look frozen, turn on Windows **Settings → Accessibility → Visual effects → Animation effects**.
 
 ## Deploy to Vercel
 
