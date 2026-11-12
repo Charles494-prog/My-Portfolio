@@ -2,6 +2,23 @@
     const root = document.documentElement;
     root.classList.add('js');
     const still = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Intro: loading screen with an "keep animations on" tip.
+    // Motion on: fades out once the page has loaded. Motion off: waits for a click and explains how to enable it.
+    const intro = document.getElementById('intro');
+    if (intro) {
+        const go = document.getElementById('introGo');
+        const close = () => { intro.classList.add('gone'); document.body.style.overflow = ''; };
+        document.body.style.overflow = 'hidden';
+        go.addEventListener('click', close);
+        if (still.matches) {
+            intro.querySelector('.intro-off').hidden = false;
+            go.focus();
+        } else {
+            const auto = () => setTimeout(close, 2200);
+            if (document.readyState === 'complete') auto(); else window.addEventListener('load', auto, { once: true });
+        }
+    }
     const $ = (sel, el = document) => el.querySelector(sel);
     const $$ = (sel, el = document) => [...el.querySelectorAll(sel)];
     const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -535,7 +552,7 @@
     /* ---------- Bonus: "More stack" deep dive ---------- */
     const nerdToggle = $('#nerdToggle');
     const nerdPanel = $('#nerdPanel');
-    $$('.nerd-card', nerdPanel).forEach((card, i) => card.style.setProperty('--i', String(i)));
+    $$('.scene', nerdPanel).forEach((card, i) => card.style.setProperty('--i', String(i)));
     nerdToggle.addEventListener('click', () => {
         const open = nerdToggle.getAttribute('aria-expanded') !== 'true';
         nerdToggle.setAttribute('aria-expanded', String(open));

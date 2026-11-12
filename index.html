@@ -20,6 +20,15 @@
     </script>
 </head>
 <body>
+    <div class="intro" id="intro" role="dialog" aria-labelledby="introTitle">
+        <div class="intro-card">
+            <p class="intro-name" id="introTitle">Charles Andrei Galvan</p>
+            <div class="intro-bar"><i></i></div>
+            <p class="intro-tip"><b>Tip:</b> this site tells its story with animation. Keep animations turned on for the best experience.</p>
+            <p class="intro-off" hidden>Your device has animations turned off, so you’ll see a still version. To turn them on: <b>Windows</b> Settings › Accessibility › Visual effects › Animation effects · <b>Mac</b> System Settings › Accessibility › Display › untick Reduce motion · <b>Phone</b> Accessibility › Motion. Then reload.</p>
+            <button class="btn" type="button" id="introGo">Enter the site</button>
+        </div>
+    </div>
     <a class="skip" href="#belief">Skip to content</a>
 
     <!-- Full-screen 3D particle field that reshapes for each chapter (scene.js). Decorative only. -->
@@ -383,7 +392,8 @@
                                 <pre class="editor-body"><code data-code></code><span class="caret"></span></pre>
                             </div>
                         </div>
-                        <h3>Software</h3><ul class="chips"><li>PHP</li><li>JavaScript</li><li>TypeScript</li><li>Python</li><li>Rust</li><li>Java</li><li>SQL</li><li>Laravel</li><li>React</li><li>Node.js</li><li>Tauri</li></ul>
+                        <h3>Software</h3><ul class="chips"><li>PHP</li><li>JavaScript</li><li>TypeScript</li><li>Python</li><li>Rust</li><li>Java</li><li>SQL</li><li>Laravel</li><li>React</li><li>Node.js</li><li>Tauri</li><li>Tailwind CSS</li><li>UI / UX design</li><li>Batch</li><li>PowerShell</li></ul>
+                        <p class="ships">I build for <b>desktop</b>, <b>mobile</b> and <b>games</b>.</p>
                     </div>
                     <!-- Data: a live mini dashboard -->
                     <div class="skill-group reveal3d tilt" data-viz="data">
@@ -396,7 +406,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <h3>Data</h3><ul class="chips"><li>MySQL / MariaDB</li><li>SQLite</li><li>Database design</li><li>Excel VBA</li><li>Power BI</li></ul>
+                        <h3>Data</h3><ul class="chips"><li>MySQL / MariaDB</li><li>SQLite</li><li>Database design</li><li>Excel VBA</li><li>Power BI</li><li>Dashboards (Chart.js)</li><li>Data visualization</li></ul>
                     </div>
                     <!-- Networking: packets moving through a LAN -->
                     <div class="skill-group reveal3d tilt" data-viz="net">
@@ -407,7 +417,27 @@
                                 <g class="nodes" data-nodes></g>
                             </svg>
                         </div>
-                        <h3>Networking &amp; IT</h3><ul class="chips"><li>LAN design</li><li>Routers &amp; switches</li><li>Firewalls</li><li>Windows &amp; Linux (Ubuntu)</li><li>Virtual machines</li><li>Cloud computing</li><li>Cybersecurity</li><li>SSH</li><li>Driver troubleshooting (DDU, WhoCrashed)</li><li>System Restore</li><li>Troubleshooting</li><li>PowerShell</li></ul>
+                        <h3>Networking</h3><ul class="chips"><li>LAN design</li><li>Routers &amp; switches</li><li>Firewalls</li><li>SSH</li><li>Cybersecurity</li><li>Cloud computing</li></ul>
+                    </div>
+                    <!-- Linux & VMs: a VM boots and an SSH session types itself -->
+                    <div class="skill-group reveal3d tilt">
+                        <div class="viz viz-os" aria-hidden="true">
+                            <div class="host"><span class="host-lab">host PC</span><i class="vm" style="--i:0">ubuntu</i><i class="vm" style="--i:1">windows</i><i class="vm" style="--i:2">kali lab</i></div>
+                            <div class="term"><span class="type">$ ssh admin@ubuntu-vm</span></div>
+                        </div>
+                        <h3>Linux &amp; virtual machines</h3><ul class="chips"><li>Ubuntu</li><li>Linux admin</li><li>Virtual machines</li><li>Cloud labs</li><li>SSH</li></ul>
+                    </div>
+                    <!-- Windows troubleshooting: crash, diagnose, fix -->
+                    <div class="skill-group reveal3d tilt">
+                        <div class="viz viz-fix" aria-hidden="true">
+                            <div class="fix-screen">
+                                <div class="fx bsod"><b>:(</b><span>Your PC ran into a problem</span></div>
+                                <div class="fx diag"><b>WhoCrashed</b><span>cause: nvlddmkm.sys · GPU driver</span></div>
+                                <div class="fx clean"><b>DDU</b><span>old driver wiped clean</span></div>
+                                <div class="fx fx-ok"><b>✓</b><span>stable · restore point saved</span></div>
+                            </div>
+                        </div>
+                        <h3>Windows troubleshooting</h3><ul class="chips"><li>WhoCrashed (BSOD analysis)</li><li>DDU (driver cleanup)</li><li>System Restore</li><li>Driver troubleshooting</li><li>Windows admin</li><li>RustDesk (remote desktop)</li></ul>
                     </div>
                     <!-- AV: a live broadcast monitor -->
                     <div class="skill-group reveal3d tilt" data-viz="av">
@@ -460,125 +490,219 @@
             <div class="wrap">
                 <button class="nerd-toggle reveal3d" id="nerdToggle" type="button" aria-expanded="false" aria-controls="nerdPanel">
                     <span class="nerd-icon" aria-hidden="true">&lt;/&gt;</span>
-                    <span class="nerd-text"><b>More stack</b><small>for nerds like me</small></span>
+                    <span class="nerd-text"><b>More stack</b><small>the story under the hood</small></span>
                     <span class="nerd-chev" aria-hidden="true">⌄</span>
                 </button>
 
                 <div class="nerd-panel" id="nerdPanel" hidden>
-                    <p class="nerd-intro">The engineering under the hood of the systems on this page. Each item has the technical term and what it means in plain words.</p>
-                    <div class="nerd-grid">
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">◆</span> Systems architecture</h3>
-                            <ul>
-                                <li><code>Laravel 12 MVC + service layer</code>Business rules live in focused service classes (report builders, exporters, eligibility, security policy), not in controllers.</li>
-                                <li><code>Shared Rust core</code>One library powers both the Windows app and the Android app, so the same input always gives the same documents.</li>
-                                <li><code>Embedded HTTP server + WebView</code>The desktop app is a single .exe that runs its own local web server and shows it in a native window.</li>
-                                <li><code>LAN team mode</code>One PC hosts the system and every staff computer on the office network uses it at the same time.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">⚡</span> Real-time &amp; async</h3>
-                            <ul>
-                                <li><code>Laravel Reverb (WebSockets)</code>Live chat, read receipts, typing indicators and a live task feed, pushed instantly with broadcast events.</li>
-                                <li><code>Laravel Echo + pusher-js</code>The browser side that listens for those events.</li>
-                                <li><code>Queue workers + scheduler</code>Background work runs outside the request: daily cleanup and an automatic monthly backup.</li>
-                                <li><code>async / await, threads</code>Non-blocking requests in the browser; in Rust, slow work (like Android’s save dialog) runs on its own thread.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">▤</span> Database design &amp; optimization</h3>
-                            <ul>
-                                <li><code>MariaDB · migrations only</code>Every schema change is a versioned migration, so any PC can be rebuilt to the exact same structure.</li>
-                                <li><code>Indexes, unique keys, foreign keys</code>~100 constraints and lookup indexes keep searches fast and data consistent.</li>
-                                <li><code>Lean queries</code>Select only the columns needed, paginate long lists, and load reference data once per request.</li>
-                                <li><code>History &amp; audit tables</code>Every record change is logged; earlier reasons and snapshots are kept, never overwritten.</li>
-                                <li><code>Files stored in chunks</code>Uploaded files are also saved in the database in pieces, so one backup restores everything on another PC.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">⇄</span> Concurrency &amp; data integrity</h3>
-                            <ul>
-                                <li><code>Transactions + row-level locks</code>~40 critical writes run inside transactions with <code class="inline">lockForUpdate</code>, so two people editing at once never collide.</li>
-                                <li><code>Stale-data checks</code>Before saving, the server confirms the list hasn’t changed since the user opened it.</li>
-                                <li><code>Undo with state checks</code>Session changes can be undone only if nothing changed after them.</li>
-                                <li><code>Backups before migrations</code>A database dump is taken automatically before any schema update runs.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">◎</span> Multi-layered caching</h3>
-                            <ul>
-                                <li><code>PHP OPcache</code>Compiled PHP stays in memory instead of being re-read on every request.</li>
-                                <li><code>Compiled views &amp; events</code>Templates and event maps are pre-built at startup.</li>
-                                <li><code>Application cache</code>Expensive results (like the assistant’s search index) are built once and reused.</li>
-                                <li><code>Browser caching</code>Game assets cached by the browser for a day; sensitive pages marked <code class="inline">no-store</code> on purpose.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">⛨</span> Traffic control &amp; security</h3>
-                            <ul>
-                                <li><code>Rate limiting (throttle)</code>Per-route limits, e.g. 5/min on sign-up and password reset, 3/min on code resends.</li>
-                                <li><code>Progressive lockout</code>Repeated wrong logins wait longer each time: 1 min, 5 min, then 15 min.</li>
-                                <li><code>OTP · encrypted columns · RBAC</code>One-time login codes, encrypted secrets in the database, role-based access.</li>
-                                <li><code>Session hardening</code>Idle sign-out, CSRF protection, sign-out everywhere after a password change.</li>
-                                <li><code>Security headers · least privilege</code>Anti-clickjacking headers, a dedicated limited database account, database reachable only from the host PC.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">✓</span> Testing &amp; quality</h3>
-                            <ul>
-                                <li><code>~500 PHPUnit feature tests</code>Run on an in-memory database, so the whole suite runs safely in minutes.</li>
-                                <li><code>Frozen-clock tests</code>Date rules (cut-offs, monthly periods) are tested at fixed moments in time.</li>
-                                <li><code>Staging database</code>Risky changes are tried on a copy of the real data first.</li>
-                                <li><code>Regression tests</code>Fixes come with a test that proves the bug stays fixed.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">▣</span> Documents &amp; reporting</h3>
-                            <ul>
-                                <li><code>DOCX / XLSX templating</code>Fills the office’s original Word and Excel templates by editing their XML, keeping every layout, style and image.</li>
-                                <li><code>PDF &amp; Excel exports</code>DomPDF and OpenSpout for printable and spreadsheet outputs.</li>
-                                <li><code>Same output in PHP and Rust</code>The Rust version was checked to produce documents identical to the PHP one.</li>
-                                <li><code>Rule-based assistant</code>An in-app helper that understands English and Filipino questions and answers them from the database.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">⌘</span> Systems, VMs &amp; security</h3>
-                            <ul>
-                                <li><code>Virtual machines</code>Spin up VMs for cloud computing labs, testing, and isolated cybersecurity work.</li>
-                                <li><code>SSH</code>Remote access and administration of Linux machines and servers over secure shell.</li>
-                                <li><code>Ubuntu</code>Install, configure, and use Ubuntu Linux day to day.</li>
-                                <li><code>Windows deep-dive</code>System Restore points, driver troubleshooting with DDU (Display Driver Uninstaller), and crash/BSOD analysis with WhoCrashed.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">⚙</span> DevOps &amp; deployment</h3>
-                            <ul>
-                                <li><code>One-file PowerShell launchers</code>Install everything, pull updates from GitHub, and start every service with one double-click.</li>
-                                <li><code>Self-healing setup</code>Creates the database, its own DB account and settings; keeps the app key safe across reinstalls.</li>
-                                <li><code>Atomic config writes</code>Settings files are written to a temp file and swapped in, so they’re never left half-written.</li>
-                                <li><code>Android build pipeline</code>Rust cross-compiled with the Android NDK, packaged with Gradle into a signed APK.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">◈</span> Game reverse engineering</h3>
-                            <ul>
-                                <li><code>Binary TCP protocol</code>A TypeScript/Node.js game server speaking the original game’s bit-packed network format.</li>
-                                <li><code>ActionScript bytecode patching</code>Python tools that edit the Flash client’s compiled code directly.</li>
-                                <li><code>Enemy AI &amp; pathfinding</code>Rebuilt the missing monster behaviour so the single-player game is playable.</li>
-                                <li><code>JSON-patch mods · Discord RPC</code>Moddable game data and live Discord status.</li>
-                                <li><code>x86 code caves · PE sections</code>Battle Realms: added a new executable section and hooks that lift hard-coded caps, gated per clan.</li>
-                                <li><code>Data-driven presets</code>One INI → nine spreadsheets, cell-level patches with a CSV audit of every change.</li>
-                            </ul>
-                        </article>
-                        <article class="nerd-card">
-                            <h3><span aria-hidden="true">✦</span> Front end &amp; this site</h3>
-                            <ul>
-                                <li><code>Vite · Tailwind CSS · Chart.js</code>Fast builds, consistent design and live dashboards in the records platform.</li>
-                                <li><code>Three.js · WebGL</code>The 3D particles behind this page reshape for each chapter.</li>
-                                <li><code>Accessible motion</code>Every animation respects the visitor’s “reduce motion” setting.</li>
-                                <li><code>Zero-build static deploy</code>This portfolio is plain HTML, CSS and JS, hosted on Vercel.</li>
-                            </ul>
-                        </article>
+                    <p class="nerd-intro">Behind every screen on this page there’s a story of what happens under the hood. Open a scene to watch it play out, then read the real terms underneath.</p>
+                    <div class="scenes">
+                        <details class="scene">
+                            <summary><span class="sc-no">01</span><span class="sc-t"><b>One brain, two bodies</b><small>Systems architecture</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-flow" aria-hidden="true"><span class="n">Windows .exe</span><i class="w rev"><em></em></i><span class="n hot">Rust core</span><i class="w"><em></em></i><span class="n">Android APK</span></div>
+                                <p class="sv-cap">The same engine runs inside both apps, so the same input always prints the same document.</p>
+                                <ul>
+                                    <li><code>Laravel 12 MVC + service layer</code>Business rules live in focused service classes (report builders, exporters, eligibility, security policy), not in controllers.</li>
+                                    <li><code>Shared Rust core</code>One library powers both the Windows app and the Android app.</li>
+                                    <li><code>Embedded HTTP server + WebView</code>The desktop app is a single .exe that runs its own local web server and shows it in a native window.</li>
+                                    <li><code>LAN team mode</code>One PC hosts the system and every staff computer on the office network uses it at the same time.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">02</span><span class="sc-t"><b>Messages that arrive instantly</b><small>Real-time &amp; async</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-chat" aria-hidden="true"><span class="bub a" style="--i:0">Report ready?</span><span class="bub typing" style="--i:1"><i></i><i></i><i></i></span><span class="bub b" style="--i:2">Yes, sent ✓✓</span></div>
+                                <p class="sv-cap">No refreshing. The server pushes each message, typing dot and read receipt the moment it happens.</p>
+                                <ul>
+                                    <li><code>Laravel Reverb (WebSockets)</code>Live chat, read receipts, typing indicators and a live task feed, pushed with broadcast events.</li>
+                                    <li><code>Laravel Echo + pusher-js</code>The browser side that listens for those events.</li>
+                                    <li><code>Queue workers + scheduler</code>Background work runs outside the request: daily cleanup and an automatic monthly backup.</li>
+                                    <li><code>async / await, threads</code>Non-blocking requests in the browser; in Rust, slow work runs on its own thread.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">03</span><span class="sc-t"><b>Finding one record in thousands</b><small>Database design &amp; optimization</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-index" aria-hidden="true">
+                                    <div class="col scan"><span class="col-lab">no index</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b class="mk"></b></div>
+                                    <div class="col idx"><span class="col-lab">with index</span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b class="mk"></b></div>
+                                </div>
+                                <p class="sv-cap">Without an index the database reads every row. With one, it jumps straight to the answer.</p>
+                                <ul>
+                                    <li><code>MariaDB · migrations only</code>Every schema change is a versioned migration, so any PC can be rebuilt to the exact same structure.</li>
+                                    <li><code>Indexes, unique keys, foreign keys</code>~100 constraints and lookup indexes keep searches fast and data consistent.</li>
+                                    <li><code>Lean queries</code>Select only the columns needed, paginate long lists, and load reference data once per request.</li>
+                                    <li><code>History &amp; audit tables</code>Every record change is logged; earlier reasons and snapshots are kept, never overwritten.</li>
+                                    <li><code>Files stored in chunks</code>Uploaded files are also saved in the database in pieces, so one backup restores everything.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">04</span><span class="sc-t"><b>Two people, one record, no collision</b><small>Concurrency &amp; data integrity</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-flow sv-lock" aria-hidden="true"><span class="n">Staff A</span><i class="w wa"><em></em></i><span class="n row"><span class="r0">record #42</span><span class="r1">🔒 A saving…</span></span><i class="w wb"><em></em></i><span class="n">Staff B</span></div>
+                                <p class="sv-cap">A gets there first and locks the row. B waits a beat, then saves on top of A’s change, not over it.</p>
+                                <ul>
+                                    <li><code>Transactions + row-level locks</code>~40 critical writes run inside transactions with <code class="inline">lockForUpdate</code>.</li>
+                                    <li><code>Stale-data checks</code>Before saving, the server confirms the list hasn’t changed since the user opened it.</li>
+                                    <li><code>Undo with state checks</code>Session changes can be undone only if nothing changed after them.</li>
+                                    <li><code>Backups before migrations</code>A database dump is taken automatically before any schema update runs.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">05</span><span class="sc-t"><b>Remember it, don’t redo it</b><small>Multi-layered caching</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-cache" aria-hidden="true">
+                                    <div class="sv-flow"><span class="n">1st visit</span><i class="w slow"><em></em></i><span class="n">database · 900 ms</span></div>
+                                    <div class="sv-flow"><span class="n">next visit</span><i class="w fast"><em></em></i><span class="n hot">cache · 4 ms</span></div>
+                                </div>
+                                <p class="sv-cap">The slow answer is worked out once, kept close, and handed back instantly after that.</p>
+                                <ul>
+                                    <li><code>PHP OPcache</code>Compiled PHP stays in memory instead of being re-read on every request.</li>
+                                    <li><code>Compiled views &amp; events</code>Templates and event maps are pre-built at startup.</li>
+                                    <li><code>Application cache</code>Expensive results (like the assistant’s search index) are built once and reused.</li>
+                                    <li><code>Browser caching</code>Game assets cached for a day; sensitive pages marked <code class="inline">no-store</code> on purpose.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">06</span><span class="sc-t"><b>The bouncer at the door</b><small>Throttling &amp; security</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-throttle" aria-hidden="true">
+                                    <i class="lane"></i><i class="gate"></i><span class="tag t-gate">limit 5 / min</span><span class="tag t-ok">let in</span><span class="tag t-no">429 · wait</span>
+                                    <em class="req" style="--i:0"></em><em class="req" style="--i:1"></em><em class="req" style="--i:2"></em><em class="req" style="--i:3"></em><em class="req" style="--i:4"></em><em class="req no" style="--i:5"></em><em class="req no" style="--i:6"></em><em class="req no" style="--i:7"></em>
+                                </div>
+                                <p class="sv-cap"><b>Throttling</b> lets the first 5 sign-up attempts in each minute through and turns the rest away, so bots can’t hammer the login.</p>
+                                <ul>
+                                    <li><code>Rate limiting (throttle)</code>Per-route limits, e.g. 5/min on sign-up and password reset, 3/min on code resends.</li>
+                                    <li><code>Progressive lockout</code>Repeated wrong logins wait longer each time: 1 min, 5 min, then 15 min.</li>
+                                    <li><code>OTP · encrypted columns · RBAC</code>One-time login codes, encrypted secrets in the database, role-based access.</li>
+                                    <li><code>Session hardening</code>Idle sign-out, CSRF protection, sign-out everywhere after a password change.</li>
+                                    <li><code>Security headers · least privilege</code>Anti-clickjacking headers and a dedicated limited database account.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">07</span><span class="sc-t"><b>Proving it works, every time</b><small>Testing &amp; quality</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-steps" aria-hidden="true"><span style="--i:0">✓ login locks after 5 tries</span><span style="--i:1">✓ monthly cut-off on the 25th</span><span style="--i:2">✓ two edits never collide</span><span style="--i:3">✓ 500 / 500 passed</span></div>
+                                <p class="sv-cap">Hundreds of robot checks click through the system before a real person ever does.</p>
+                                <ul>
+                                    <li><code>~500 PHPUnit feature tests</code>Run on an in-memory database, so the whole suite runs safely in minutes.</li>
+                                    <li><code>Frozen-clock tests</code>Date rules are tested at fixed moments in time.</li>
+                                    <li><code>Staging database</code>Risky changes are tried on a copy of the real data first.</li>
+                                    <li><code>Regression tests</code>Fixes come with a test that proves the bug stays fixed.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">08</span><span class="sc-t"><b>The paperwork fills itself</b><small>Documents &amp; reporting</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-doc" aria-hidden="true"><div class="page"><b class="ph"></b><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i></div></div>
+                                <p class="sv-cap">The office’s own Word and Excel templates, filled in line by line, with every logo and layout kept.</p>
+                                <ul>
+                                    <li><code>DOCX / XLSX templating</code>Fills the original templates by editing their XML.</li>
+                                    <li><code>PDF &amp; Excel exports</code>DomPDF and OpenSpout for printable and spreadsheet outputs.</li>
+                                    <li><code>Same output in PHP and Rust</code>The Rust version produces documents identical to the PHP one.</li>
+                                    <li><code>Built-in assistant</code>The chatbot in scene 09 can pull these same reports on request.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">09</span><span class="sc-t"><b>Ask it anything, it checks the database</b><small>In-app assistant chatbot</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-chat sv-bot" aria-hidden="true"><span class="bub b" style="--i:0">Ilan ang records ngayong buwan?</span><span class="bub sql" style="--i:1">⌕ SELECT COUNT(*) FROM records WHERE month = now</span><span class="bub a" style="--i:2">128 records so far this month. 12 still need a signature.</span></div>
+                                <p class="sv-cap">Staff type a question in English or Filipino. The assistant works out what they mean, looks up the live database, and replies with the real numbers.</p>
+                                <ul>
+                                    <li><code>Intent matching</code>A rule-based engine maps a question to the right query, in English or Filipino, even with typos.</li>
+                                    <li><code>Live database answers</code>Replies come from the current data, not a fixed script, and respect each user’s access rights.</li>
+                                    <li><code>Cached search index</code>The knowledge index is built once and reused, so answers come back instantly.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">10</span><span class="sc-t"><b>Machines inside a machine</b><small>Linux, VMs &amp; SSH</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-os" aria-hidden="true"><div class="host"><span class="host-lab">host PC</span><i class="vm" style="--i:0">ubuntu</i><i class="vm" style="--i:1">server</i><i class="vm" style="--i:2">security lab</i></div><div class="term"><span class="type">$ ssh admin@ubuntu-vm</span></div></div>
+                                <p class="sv-cap">Whole computers running as windows on one PC, safe to break, and reachable from anywhere over SSH.</p>
+                                <ul>
+                                    <li><code>Virtual machines</code>VMs for cloud computing labs, testing, and isolated cybersecurity work.</li>
+                                    <li><code>SSH</code>Remote access and administration of Linux machines over secure shell.</li>
+                                    <li><code>Ubuntu</code>Install, configure, and use Ubuntu Linux day to day.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">11</span><span class="sc-t"><b>Blue screen to back at work</b><small>Windows troubleshooting</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-fix" aria-hidden="true"><div class="fix-screen"><div class="fx bsod"><b>:(</b><span>Your PC ran into a problem</span></div><div class="fx diag"><b>WhoCrashed</b><span>cause: nvlddmkm.sys · GPU driver</span></div><div class="fx clean"><b>DDU</b><span>old driver wiped clean</span></div><div class="fx fx-ok"><b>✓</b><span>stable · restore point saved</span></div></div></div>
+                                <p class="sv-cap">Crash, find the guilty driver, wipe it completely, reinstall clean, and save a point to roll back to.</p>
+                                <ul>
+                                    <li><code>WhoCrashed</code>Reads crash dumps after a blue screen and names the driver that caused it.</li>
+                                    <li><code>DDU (Display Driver Uninstaller)</code>Removes every trace of a broken graphics driver before a clean reinstall.</li>
+                                    <li><code>System Restore</code>Creates restore points and rolls a PC back when an update breaks it.</li>
+                                    <li><code>RustDesk</code>Remote desktop to configure and fix staff computers without walking to each one.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">12</span><span class="sc-t"><b>One double-click setup</b><small>DevOps, PowerShell &amp; Batch</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-steps sv-pipe" aria-hidden="true"><span style="--i:0">install</span><span style="--i:1">pull update</span><span style="--i:2">migrate</span><span style="--i:3">start ✓</span></div>
+                                <p class="sv-cap">Staff double-click one file. Scripts do every setup step that used to need an IT person.</p>
+                                <ul>
+                                    <li><code>One-file PowerShell launchers</code>Install everything, pull updates from GitHub, and start every service with one double-click.</li>
+                                    <li><code>Batch scripts</code>Small .bat launchers and helpers, like the one-click clan launchers in the Battle Realms mod.</li>
+                                    <li><code>Self-healing setup</code>Creates the database, its own DB account and settings; keeps the app key safe across reinstalls.</li>
+                                    <li><code>Atomic config writes</code>Settings are written to a temp file and swapped in, never left half-written.</li>
+                                    <li><code>Android build pipeline</code>Rust cross-compiled with the Android NDK, packaged with Gradle into a signed APK.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">13</span><span class="sc-t"><b>Rewriting a game with no source code</b><small>Game reverse engineering</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-hex" aria-hidden="true"><div class="hex"><span>83</span><span>F8</span><span class="hx-flip"><b>28</b><b>E7 03</b></span><span>7C</span><span>05</span><span>E9</span></div><div class="hex-lab"><span class="h0">unit cap = 40</span><span class="h1">unit cap = 999</span></div></div>
+                                <p class="sv-cap">Find the exact bytes in the compiled program that set a limit, and change them.</p>
+                                <ul>
+                                    <li><code>Binary TCP protocol</code>A TypeScript/Node.js game server speaking the original game’s bit-packed network format.</li>
+                                    <li><code>ActionScript bytecode patching</code>Python tools that edit the Flash client’s compiled code directly.</li>
+                                    <li><code>Enemy AI &amp; pathfinding</code>Rebuilt the missing monster behaviour so the single-player game is playable.</li>
+                                    <li><code>x86 code caves · PE sections</code>Battle Realms: a new executable section and hooks that lift hard-coded caps, gated per clan.</li>
+                                    <li><code>Data-driven presets</code>One INI → nine spreadsheets, cell-level patches with a CSV audit of every change.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">14</span><span class="sc-t"><b>Screens anyone can read at a glance</b><small>UI design &amp; dashboards</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-dash" aria-hidden="true"><div class="dsh"><div class="kpis"><span style="--i:0"><b>128</b>records</span><span style="--i:1"><b>12</b>pending</span><span style="--i:2"><b>96%</b>on time</span></div><div class="dsh-bars"><i style="--h:40%;--i:0"></i><i style="--h:65%;--i:1"></i><i style="--h:50%;--i:2"></i><i style="--h:80%;--i:3"></i><i style="--h:70%;--i:4"></i><i style="--h:95%;--i:5"></i></div></div></div>
+                                <p class="sv-cap">Clean, simple screens and dashboards that turn rows of data into numbers and charts staff understand in seconds.</p>
+                                <ul>
+                                    <li><code>Live dashboards · Chart.js</code>Totals, trends and pending work on one screen, updating from the database.</li>
+                                    <li><code>Tailwind CSS · consistent design</code>The same spacing, colours and components everywhere, so every page feels familiar.</li>
+                                    <li><code>Plain-language UI</code>Clear labels, helpful empty states and confirmations written for non-technical staff.</li>
+                                    <li><code>Accessible &amp; responsive</code>Readable contrast, keyboard friendly, and it works on phones as well as desktops.</li>
+                                </ul>
+                            </div>
+                        </details>
+                        <details class="scene">
+                            <summary><span class="sc-no">15</span><span class="sc-t"><b>Desktop, phone and game</b><small>Platforms I build for</small></span><span class="sc-chev" aria-hidden="true">+</span></summary>
+                            <div class="sc-body">
+                                <div class="sv sv-plat" aria-hidden="true"><span class="dv desk" style="--i:0"><i></i>desktop</span><span class="dv phone" style="--i:1"><i></i>mobile</span><span class="dv pad" style="--i:2"><i></i>games</span></div>
+                                <p class="sv-cap">I write the code for all three: Windows desktop apps, Android apps, and games.</p>
+                                <ul>
+                                    <li><code>Desktop apps</code>Single-file Windows apps with Rust, Tauri and an embedded web UI.</li>
+                                    <li><code>Mobile apps</code>Android apps sharing the same Rust core, built into signed APKs.</li>
+                                    <li><code>Games</code>Game servers, mods, AI and patches in TypeScript, Python and x86.</li>
+                                    <li><code>Three.js · Vite · Tailwind</code>The web layer, including the 3D particles behind this page.</li>
+                                </ul>
+                            </div>
+                        </details>
                     </div>
                 </div>
             </div>
